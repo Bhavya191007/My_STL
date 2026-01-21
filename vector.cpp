@@ -21,6 +21,20 @@ class vector
         T& operator[](std::size_t index){
             return data[index];
         }
+        void operator=(vector<T>& vect)
+        {
+            size_t capacity=vect.capacity;
+            size_t csize=vect.csize;
+            data = std::make_unique<T[]>(capacity);
+            for(int i=0;i<csize;i++)
+            {
+                data[i]=vect.data[i];
+            }
+        }
+        size_t size()
+        {
+            return csize;
+        }
     private:
         void resize(std::size_t c)
         {
@@ -40,6 +54,9 @@ int main()
     vector<std::string>vec;
     vec.push_back("Bhavya");
     vec.push_back("Samarth");
-    std::cout<<vec[0]<<vec[1]<<"\n";
+    std::cout<<vec.size()<<vec[1]<<"\n";
+    vector<std::string>vec1;
+    vec1=vec;
+    std::cout<<vec1[1];
     return 0;
 }
